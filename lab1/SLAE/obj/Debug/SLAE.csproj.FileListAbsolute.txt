@@ -1,0 +1,9 @@
+D:\C#\BSUIR-DIVM\lab1\SLAE\bin\Debug\SLAE.dll
+D:\C#\BSUIR-DIVM\lab1\SLAE\bin\Debug\SLAE.pdb
+D:\C#\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.dll
+D:\C#\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.pdb
+D:\C#\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.csprojResolveAssemblyReference.cache
+C:\C#\BSUIR-DIVM\lab1\SLAE\bin\Debug\SLAE.dll
+C:\C#\BSUIR-DIVM\lab1\SLAE\bin\Debug\SLAE.pdb
+C:\C#\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.dll
+C:\C#\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.pdb
