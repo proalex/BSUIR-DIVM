@@ -10,6 +10,7 @@ namespace SLAE
         private double[] _b = new double[3];
         private double[] _x = new double[3];
         private bool _inputError;
+        private bool x3 = false;
 
         public Gauss(DataGridView a, DataGridView b) : base()
         {
@@ -60,6 +61,15 @@ namespace SLAE
                 return false;
             }
 
+            if (_a[0, 0] == 0 && _a[1, 0] == 0 && _a[2, 0] == 0 && _a[2, 1] == 0 && _a[2, 2] == 0 && _b[2] == 0)
+            {
+                _a[0, 0] = _a[0, 1];
+                _a[1, 0] = _a[1, 1];
+                _a[0, 1] = _a[0, 2];
+                _a[1, 1] = _a[1, 2];
+                x3 = true;
+            }
+
             SortRows();
             ToUpperTriangularMx();
 
@@ -70,8 +80,9 @@ namespace SLAE
             }
 
             TriangularToIdentityMx();
+            ExtractX();
 
-            if (!ExtractX())
+            if (_x[0] == 1 && Double.IsPositiveInfinity(_x[1]) && Double.IsPositiveInfinity(_x[2]))
             {
                 Message = "Система имеет бесконечное количество решений.";
                 return false;
@@ -83,6 +94,14 @@ namespace SLAE
                 return false;
             }
 
+            if (x3)
+            {
+                XStrings[2] = XStrings[1];
+                XStrings[1] = XStrings[0];
+                Message += " X1 не влияет на решение.";
+                XStrings[0] = "Свободен";
+            }
+
             return true;
         }
 
@@ -92,16 +111,19 @@ namespace SLAE
             {
                 double temp = 0;
                 double temp2 = Math.Round(_b[i], 1);
+                bool skip = false;
 
                 for (int j = 0; j < _a.GetLength(0); j++)
                 {
                     if (!double.IsPositiveInfinity(_x[j]))
-                        temp += _a[i, j]*_x[j];
+                        temp += _a[i, j] * _x[j];
+                    else
+                        skip = true;
                 }
 
                 temp = Math.Round(temp, 1);
 
-                if (temp != temp2)
+                if (temp != temp2 && !skip)
                     return false;
             }
 
@@ -238,7 +260,7 @@ namespace SLAE
                     {
                         for (int j = i + 1; j < _a.GetLength(1); j++)
                         {
-                            if (double.IsPositiveInfinity(_x[j]) && _a[i, j] != 0)
+                            if (double.IsPositiveInfinity(_x[j]) && _a[i, j] != 0 && !x3)
                                 XStrings[i] += "-X" + (j + 1);
                             else
                             {

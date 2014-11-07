@@ -20,3 +20,14 @@ C:\C#\BSUIR-DIVM\lab1\lab1\obj\Debug\lab1.csprojResolveAssemblyReference.cache
 C:\C#\BSUIR-DIVM\lab1\lab1\obj\Debug\lab1.SLAE.resources
 C:\C#\BSUIR-DIVM\lab1\lab1\obj\Debug\lab1.Properties.Resources.resources
 C:\C#\BSUIR-DIVM\lab1\lab1\obj\Debug\lab1.csproj.GenerateResource.Cache
+D:\BSUIR\BSUIR-DIVM\lab1\lab1\bin\Debug\lab1.exe.config
+D:\BSUIR\BSUIR-DIVM\lab1\lab1\obj\Debug\lab1.exe
+D:\BSUIR\BSUIR-DIVM\lab1\lab1\obj\Debug\lab1.pdb
+D:\BSUIR\BSUIR-DIVM\lab1\lab1\bin\Debug\lab1.exe
+D:\BSUIR\BSUIR-DIVM\lab1\lab1\bin\Debug\lab1.pdb
+D:\BSUIR\BSUIR-DIVM\lab1\lab1\bin\Debug\SLAE.dll
+D:\BSUIR\BSUIR-DIVM\lab1\lab1\bin\Debug\SLAE.pdb
+D:\BSUIR\BSUIR-DIVM\lab1\lab1\obj\Debug\lab1.csprojResolveAssemblyReference.cache
+D:\BSUIR\BSUIR-DIVM\lab1\lab1\obj\Debug\lab1.SLAE.resources
+D:\BSUIR\BSUIR-DIVM\lab1\lab1\obj\Debug\lab1.Properties.Resources.resources
+D:\BSUIR\BSUIR-DIVM\lab1\lab1\obj\Debug\lab1.csproj.GenerateResource.Cache

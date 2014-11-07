@@ -7,3 +7,8 @@ C:\C#\BSUIR-DIVM\lab1\SLAE\bin\Debug\SLAE.dll
 C:\C#\BSUIR-DIVM\lab1\SLAE\bin\Debug\SLAE.pdb
 C:\C#\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.dll
 C:\C#\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.pdb
+D:\BSUIR\BSUIR-DIVM\lab1\SLAE\bin\Debug\SLAE.dll
+D:\BSUIR\BSUIR-DIVM\lab1\SLAE\bin\Debug\SLAE.pdb
+D:\BSUIR\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.csprojResolveAssemblyReference.cache
+D:\BSUIR\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.dll
+D:\BSUIR\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.pdb
