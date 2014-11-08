@@ -52,15 +52,19 @@ namespace SLAE
             }
 
             XStrings = new string[3];
+            X = new double[3];
         }
 
-        public override bool Solve()
+        public override bool Solve(bool insertPerturbation = false)
         {
             if (_inputError)
             {
                 Message = "Ошибка: данные введены не верно.";
                 return false;
             }
+
+            if (insertPerturbation)
+                _b[2] += 0.01;
 
             if (!IsSymmetricMx())
                 ToSymmetricMx();
@@ -203,6 +207,7 @@ namespace SLAE
                 }
 
                 XStrings[i] = Math.Round(_b[i].Real, 2).ToString();
+                X[i] = Math.Round(_b[i].Real, 2);
                 bFound++;
             }
         }

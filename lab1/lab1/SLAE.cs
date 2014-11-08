@@ -66,6 +66,7 @@ namespace lab1
                 return;
 
             var currentAlg = listBox1.SelectedItem.ToString();
+            string message = "";
             dataGridView2.Rows.Clear();
             dataGridView4.Rows.Clear();
             dataGridView5.Rows.Clear();
@@ -81,26 +82,91 @@ namespace lab1
 
                     if (solution.Solve())
                     {
+                        double[] xDiff = new double[3];
+                        double bDiff;
+                        bool isConditionNumber = true;
+
+                        message = solution.Message;
                         dataGridView2.Rows.Add(solution.XStrings);
-                    }
 
-                    if (solution.LStrings != null)
-                    {
-                        foreach (var row in solution.LStrings)
+                        if (solution.LStrings != null)
                         {
-                            dataGridView4.Rows.Add(row);
+                            foreach (var row in solution.LStrings)
+                            {
+                                dataGridView4.Rows.Add(row);
+                            }
+                        }
+
+                        if (solution.UStrings != null)
+                        {
+                            foreach (var row in solution.UStrings)
+                            {
+                                dataGridView5.Rows.Add(row);
+                            }
+                        }
+
+                        foreach (var x in solution.XStrings)
+                        {
+                            try
+                            {
+                                Math.Round(Convert.ToDouble(x), 8);
+                            }
+                            catch (FormatException)
+                            {
+                                isConditionNumber = false;
+                                break;
+                            }
+
+                        }
+
+                        if (isConditionNumber)
+                        {
+                            for (int i = 0; i < solution.X.GetLength(0); i++)
+                            {
+                                xDiff[i] = solution.X[i];
+                            }
+
+                            solution = (SLAEAlg)Activator
+                                .CreateInstance(algorithm, dataGridView1, dataGridView3);
+                            solution.Solve(true);
+                            bDiff = Math.Abs((Math.Round(Convert.ToDouble(dataGridView3.Rows[0].Cells[0].Value.ToString()), 8) + 0.01) / 0.01);
+
+                            for (int i = 0; i < solution.X.GetLength(0); i++)
+                            {
+                                xDiff[i] = Math.Abs(solution.X[i] - xDiff[i]);
+                                xDiff[i] *= bDiff;
+                            }
+
+                            for (int i = xDiff.GetLength(0) - 1; i > 0; i--)
+                            {
+                                for (int j = 0; j < i; j++)
+                                {
+                                    if (xDiff[j] > xDiff[j + 1])
+                                    {
+                                        double temp = xDiff[j + 1];
+                                        xDiff[j + 1] = xDiff[j];
+                                        xDiff[j] = temp;
+                                    }
+                                }
+                            }
+
+                            label3.Text = Math.Round(xDiff[0], 2) + " >= Мера обусловленности <= "
+                                + Math.Round(xDiff[xDiff.GetLength(0) - 1], 2) + Environment.NewLine;
+
+                            if (xDiff[0] > 10)
+                                label3.Text += "Система плохо обусловлена.";
+                            else
+                                label3.Text += "Система хорошо обусловлена.";
+
+                            label3.Update();
                         }
                     }
-
-                    if (solution.UStrings != null)
+                    else
                     {
-                        foreach (var row in solution.UStrings)
-                        {
-                            dataGridView5.Rows.Add(row);
-                        }
+                        message = solution.Message;
                     }
 
-                    label1.Text = solution.Message;
+                    label1.Text = message;
                     label1.Update();
                     break;
                 }

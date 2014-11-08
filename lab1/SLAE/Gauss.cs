@@ -10,7 +10,7 @@ namespace SLAE
         private double[] _b = new double[3];
         private double[] _x = new double[3];
         private bool _inputError;
-        private bool x3 = false;
+        private bool _x3 = false;
 
         public Gauss(DataGridView a, DataGridView b) : base()
         {
@@ -20,9 +20,9 @@ namespace SLAE
             {
                 try
                 {
-                    _a[i, 0] = Math.Round(Convert.ToDouble(row.Cells["A1"].Value.ToString()), 8);
-                    _a[i, 1] = Math.Round(Convert.ToDouble(row.Cells["A2"].Value.ToString()), 8);
-                    _a[i, 2] = Math.Round(Convert.ToDouble(row.Cells["A3"].Value.ToString()), 8);
+                    _a[i, 0] = Convert.ToDouble(row.Cells["A1"].Value.ToString());
+                    _a[i, 1] = Convert.ToDouble(row.Cells["A2"].Value.ToString());
+                    _a[i, 2] = Convert.ToDouble(row.Cells["A3"].Value.ToString());
                 }
                 catch (FormatException)
                 {
@@ -39,7 +39,7 @@ namespace SLAE
             {
                 try
                 {
-                    _b[i] = Math.Round(Convert.ToDouble(row.Cells["B"].Value.ToString()), 8);
+                    _b[i] = Convert.ToDouble(row.Cells["B"].Value.ToString());
                 }
                 catch (FormatException)
                 {
@@ -51,9 +51,10 @@ namespace SLAE
             }
 
             XStrings = new string[3];
+            X = new double[3];
         }
 
-        public override bool Solve()
+        public override bool Solve(bool insertPerturbation = false)
         {
             if (_inputError)
             {
@@ -61,13 +62,16 @@ namespace SLAE
                 return false;
             }
 
+            if (insertPerturbation)
+                _b[2] += 0.01;
+
             if (_a[0, 0] == 0 && _a[1, 0] == 0 && _a[2, 0] == 0 && _a[2, 1] == 0 && _a[2, 2] == 0 && _b[2] == 0)
             {
                 _a[0, 0] = _a[0, 1];
                 _a[1, 0] = _a[1, 1];
                 _a[0, 1] = _a[0, 2];
                 _a[1, 1] = _a[1, 2];
-                x3 = true;
+                _x3 = true;
             }
 
             SortRows();
@@ -82,7 +86,8 @@ namespace SLAE
             TriangularToIdentityMx();
             ExtractX();
 
-            if (_x[0] == 1 && Double.IsPositiveInfinity(_x[1]) && Double.IsPositiveInfinity(_x[2]))
+            if ((_x[0] == 1 || Double.IsPositiveInfinity(_x[0])) && Double.IsPositiveInfinity(_x[1])
+                && Double.IsPositiveInfinity(_x[2]))
             {
                 Message = "Система имеет бесконечное количество решений.";
                 return false;
@@ -94,7 +99,7 @@ namespace SLAE
                 return false;
             }
 
-            if (x3)
+            if (_x3)
             {
                 XStrings[2] = XStrings[1];
                 XStrings[1] = XStrings[0];
@@ -254,13 +259,14 @@ namespace SLAE
             {
                 if (!double.IsPositiveInfinity(_x[i]))
                 {
+                    X[i] = _x[i];
                     XStrings[i] = Math.Round(_x[i], 2).ToString();
 
                     if (i == 0)
                     {
                         for (int j = i + 1; j < _a.GetLength(1); j++)
                         {
-                            if (double.IsPositiveInfinity(_x[j]) && _a[i, j] != 0 && !x3)
+                            if (double.IsPositiveInfinity(_x[j]) && _a[i, j] != 0 && !_x3)
                                 XStrings[i] += "-X" + (j + 1);
                             else
                             {
