@@ -52,7 +52,7 @@ namespace SLAE
             X = new double[3];
         }
 
-        public override bool Solve(bool insertPerturbation = false)
+        public override bool Solve()
         {
             int[] indx = new int[_b.Length];
 
@@ -61,9 +61,6 @@ namespace SLAE
                 Message = "Ошибка: данные введены не верно.";
                 return false;
             }
-
-            if (insertPerturbation)
-                _b[2] += 0.01;
 
             if (!LUDecompose(ref indx))
             {

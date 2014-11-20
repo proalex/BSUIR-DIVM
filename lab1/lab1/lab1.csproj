@@ -78,6 +78,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MatrixLibrary\CSML\CSML.csproj">
+      <Project>{8cd08024-cdbd-4fdb-9b9f-ea35b513be92}</Project>
+      <Name>CSML</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SLAE\SLAE.csproj">
       <Project>{b3129fce-080b-48af-8b4d-2a5334bcd653}</Project>
       <Name>SLAE</Name>

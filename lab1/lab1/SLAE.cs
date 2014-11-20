@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using SLAE;
+using CSML;
 
 namespace lab1
 {
@@ -70,6 +71,8 @@ namespace lab1
             dataGridView2.Rows.Clear();
             dataGridView4.Rows.Clear();
             dataGridView5.Rows.Clear();
+            label3.Text = "";
+            label3.Update();
 
             foreach (var algorithm in _algorithms)
             {
@@ -82,8 +85,6 @@ namespace lab1
 
                     if (solution.Solve())
                     {
-                        double[] xDiff = new double[3];
-                        double bDiff;
                         bool isConditionNumber = true;
 
                         message = solution.Message;
@@ -121,43 +122,49 @@ namespace lab1
 
                         if (isConditionNumber)
                         {
-                            for (int i = 0; i < solution.X.GetLength(0); i++)
-                            {
-                                xDiff[i] = solution.X[i];
-                            }
+                            double[,] a = new double[3, 3];
+                            int i = 0;
 
-                            solution = (SLAEAlg)Activator
-                                .CreateInstance(algorithm, dataGridView1, dataGridView3);
-                            solution.Solve(true);
-                            bDiff = Math.Abs((Math.Round(Convert.ToDouble(dataGridView3.Rows[0].Cells[0].Value.ToString()), 8) + 0.01) / 0.01);
-
-                            for (int i = 0; i < solution.X.GetLength(0); i++)
+                            foreach (DataGridViewRow row in dataGridView1.Rows)
                             {
-                                xDiff[i] = Math.Abs(solution.X[i] - xDiff[i]);
-                                xDiff[i] *= bDiff;
-                            }
-
-                            for (int i = xDiff.GetLength(0) - 1; i > 0; i--)
-                            {
-                                for (int j = 0; j < i; j++)
+                                try
                                 {
-                                    if (xDiff[j] > xDiff[j + 1])
-                                    {
-                                        double temp = xDiff[j + 1];
-                                        xDiff[j + 1] = xDiff[j];
-                                        xDiff[j] = temp;
-                                    }
+                                    a[i, 0] = Convert.ToDouble(row.Cells["A1"].Value.ToString());
+                                    a[i, 1] = Convert.ToDouble(row.Cells["A2"].Value.ToString());
+                                    a[i, 2] = Convert.ToDouble(row.Cells["A3"].Value.ToString());
+                                }
+                                catch (FormatException)
+                                {
+                                    break;
+                                }
+
+                                i++;
+                            }
+
+                            double max1 = 0, max2 = 0;
+
+                            for (int j = 0; j < a.GetLength(0); j++)
+                            {
+                                for (int k = 0; k < a.GetLength(1); k++)
+                                {
+                                    if (a[j, k] > max1)
+                                        max1 = a[j, k];
                                 }
                             }
 
-                            label3.Text = Math.Round(xDiff[0], 2) + " >= Мера обусловленности <= "
-                                + Math.Round(xDiff[xDiff.GetLength(0) - 1], 2) + Environment.NewLine;
+                            Matrix matrix = new Matrix(a);
+                            matrix = matrix.Inverse();
 
-                            if (xDiff[0] > 10)
-                                label3.Text += "Система плохо обусловлена.";
-                            else
-                                label3.Text += "Система хорошо обусловлена.";
+                            for (int j = 1; j <= matrix.ColumnCount; j++)
+                            {
+                                for (int k = 1; k <= matrix.RowCount; k++)
+                                {
+                                    if (matrix[j, k].Re > max2)
+                                        max2 = matrix[j, k].Re;
+                                }
+                            }
 
+                            label3.Text = Math.Round(max1*max2, 2).ToString();
                             label3.Update();
                         }
                     }

@@ -1,0 +1,5 @@
+C:\BSUIR\BSUIR-DIVM\lab1\MatrixLibrary\CSML\bin\Debug\CSML.dll
+C:\BSUIR\BSUIR-DIVM\lab1\MatrixLibrary\CSML\bin\Debug\CSML.pdb
+C:\BSUIR\BSUIR-DIVM\lab1\MatrixLibrary\CSML\obj\Debug\CSML.csprojResolveAssemblyReference.cache
+C:\BSUIR\BSUIR-DIVM\lab1\MatrixLibrary\CSML\obj\Debug\CSML.dll
+C:\BSUIR\BSUIR-DIVM\lab1\MatrixLibrary\CSML\obj\Debug\CSML.pdb

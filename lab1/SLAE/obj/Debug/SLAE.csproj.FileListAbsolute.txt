@@ -12,3 +12,8 @@ D:\BSUIR\BSUIR-DIVM\lab1\SLAE\bin\Debug\SLAE.pdb
 D:\BSUIR\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.csprojResolveAssemblyReference.cache
 D:\BSUIR\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.dll
 D:\BSUIR\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.pdb
+C:\BSUIR\BSUIR-DIVM\lab1\SLAE\bin\Debug\SLAE.dll
+C:\BSUIR\BSUIR-DIVM\lab1\SLAE\bin\Debug\SLAE.pdb
+C:\BSUIR\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.csprojResolveAssemblyReference.cache
+C:\BSUIR\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.dll
+C:\BSUIR\BSUIR-DIVM\lab1\SLAE\obj\Debug\SLAE.pdb

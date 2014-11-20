@@ -54,16 +54,13 @@ namespace SLAE
             X = new double[3];
         }
 
-        public override bool Solve(bool insertPerturbation = false)
+        public override bool Solve()
         {
             if (_inputError)
             {
                 Message = "Ошибка: данные введены не верно.";
                 return false;
             }
-
-            if (insertPerturbation)
-                _b[2] += 0.01;
 
             if (_a[0, 0] == 0 && _a[1, 0] == 0 && _a[2, 0] == 0 && _a[2, 1] == 0 && _a[2, 2] == 0 && _b[2] == 0)
             {

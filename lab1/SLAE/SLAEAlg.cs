@@ -10,6 +10,6 @@ namespace SLAE
         public string[][] UStrings;
 
         public string Message { get; protected set; }
-        public abstract bool Solve(bool insertPerturbation = false);
+        public abstract bool Solve();
     }
 }

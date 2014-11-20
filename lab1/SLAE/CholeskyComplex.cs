@@ -55,16 +55,13 @@ namespace SLAE
             X = new double[3];
         }
 
-        public override bool Solve(bool insertPerturbation = false)
+        public override bool Solve()
         {
             if (_inputError)
             {
                 Message = "Ошибка: данные введены не верно.";
                 return false;
             }
-
-            if (insertPerturbation)
-                _b[2] += 0.01;
 
             if (!IsSymmetricMx())
                 ToSymmetricMx();
